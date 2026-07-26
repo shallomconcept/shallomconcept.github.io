@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shallom International Ministry</title>
+<meta name="description" content="Shallom International Ministry — transforming and touching lives in Nigeria through education, poverty alleviation, peace-building and community development.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F4F8FC;
+    --cream-2:#E4EFFC;
+    --charcoal:#15233A;
+    --terracotta:#1868E0;
+    --terracotta-dark:#0F4FAE;
+    --forest:#0EA65C;
+    --forest-dark:#0B7F47;
+    --ochre:#FFB020;
+    --indigo:#6C3FD1;
+    --white:#FFFFFF;
+    --line: rgba(21,35,58,0.14);
+  }
+  *{box-sizing:border-box;}
+  html, body{overflow-x:hidden; max-width:100vw;}
+  * { min-width:0; }
+  p, a, span, li { overflow-wrap:anywhere; }
+
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--charcoal);
+    font-family:'Karla', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    line-height:1.1;
+    margin:0 0 .4em 0;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    font-family:'Karla',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:.72rem;
+    font-weight:700;
+    color:var(--terracotta-dark);
+    margin-bottom:.6em;
+    display:block;
+  }
+  /* Signature divider — hand-dyed adire-inspired wave, echoing the cooperative's own cloth-dyeing work */
+  .dye-divider{
+    width:100%;
+    height:34px;
+    background:
+      linear-gradient(115deg, var(--indigo) 0%, var(--indigo) 48%, transparent 48%),
+      linear-gradient(65deg, var(--terracotta) 0%, var(--terracotta) 30%, transparent 30%),
+      linear-gradient(115deg, var(--ochre) 0%, var(--ochre) 18%, transparent 18%);
+    background-size: 64px 34px;
+    opacity:.9;
+  }
+
+  /* ===== HEADER / NAV ===== */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:var(--cream);
+    border-bottom:1px solid var(--line);
+  }
+  .navbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+    max-width:1120px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none;}
+  .brand-mark{
+    width:42px;height:42px;border-radius:50%;
+    background:conic-gradient(var(--terracotta), var(--ochre), var(--forest), var(--indigo), var(--terracotta));
+    display:flex;align-items:center;justify-content:center;
+    color:var(--white); font-family:'Fraunces',serif; font-weight:700; font-size:1.1rem;
+    flex-shrink:0;
+  }
+  .brand-text{font-family:'Fraunces',serif; font-weight:700; font-size:1.05rem; color:var(--charcoal);}
+  .brand-text small{display:block; font-family:'Karla',sans-serif; font-weight:500; font-size:.65rem; letter-spacing:.08em; text-transform:uppercase; color:var(--terracotta-dark); margin-top:2px;}
+
+  nav.tabs{
+    display:flex; gap:4px; flex-wrap:wrap;
+    background:var(--cream-2);
+    border-radius:999px;
+    padding:4px;
+  }
+  nav.tabs button{
+    border:none; background:transparent; cursor:pointer;
+    font-family:'Karla',sans-serif; font-weight:600; font-size:.86rem;
+    padding:9px 16px; border-radius:999px;
+    color:var(--charcoal); opacity:.65;
+    transition:all .2s ease;
+    white-space:nowrap;
+  }
+  nav.tabs button.active{
+    background:var(--charcoal); color:var(--cream); opacity:1;
+  }
+  nav.tabs button:hover{opacity:1;}
+
+  .nav-toggle{display:none; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--charcoal);}
+
+  @media (max-width:860px){
+    .navbar{flex-wrap:wrap;}
+    nav.tabs{display:none; width:100%; margin-top:12px; border-radius:14px; flex-direction:column;}
+    nav.tabs.open{display:flex;}
+    nav.tabs button{text-align:left; border-radius:10px;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ===== SECTIONS ===== */
+  section.page{display:none;}
+  section.page.active{display:block; animation:fadeIn .35s ease;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  .hero{
+    padding:64px 0 48px;
+    position:relative;
+  }
+  .hero-inner{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:48px; align-items:center;}
+  @media (max-width:800px){.hero-inner{grid-template-columns:1fr;}}
+  .hero h1{font-size:clamp(2.1rem, 4.2vw, 3.4rem);}
+  .hero p.lead{font-size:1.08rem; max-width:46ch; color:rgba(43,36,28,.82);}
+  .hero-img{border-radius:18px; overflow:hidden; box-shadow:0 18px 40px -18px rgba(43,36,28,.35); aspect-ratio:4/5;}
+  .hero-img img{width:100%; height:100%; object-fit:cover;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Karla',sans-serif; font-weight:700; font-size:.92rem;
+    padding:13px 26px; border-radius:999px;
+    text-decoration:none; cursor:pointer; border:none;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--terracotta); color:var(--white); box-shadow:0 8px 20px -8px rgba(181,85,46,.6);}
+  .btn-outline{background:transparent; color:var(--charcoal); border:1.5px solid var(--charcoal);}
+  .btn-forest{background:var(--forest); color:var(--white); box-shadow:0 8px 20px -8px rgba(47,74,60,.6);}
+
+  .btn-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:28px;}
+
+  .panel{
+    background:var(--white);
+    border-radius:20px;
+    padding:40px;
+    border:1px solid var(--line);
+  }
+  @media (max-width:700px){.panel{padding:26px 20px;}}
+
+  .grid-3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px;}
+  .grid-2{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:22px;}
+  @media (max-width:800px){.grid-3{grid-template-columns:1fr;} .grid-2{grid-template-columns:1fr;}}
+
+  .card{
+    background:var(--white); border-radius:16px; padding:26px;
+    border:1px solid var(--line);
+  }
+  .card h3{font-size:1.15rem; margin-bottom:.5em;}
+  .card p{font-size:.94rem; color:rgba(43,36,28,.78); margin:0;}
+  .card .num{
+    font-family:'Fraunces',serif; font-weight:600; font-size:.85rem;
+    color:var(--terracotta-dark); margin-bottom:10px; display:block;
+  }
+
+  .band{padding:64px 0;}
+  .band-alt{background:var(--cream-2);}
+
+  .gallery{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px;}
+  @media (max-width:800px){.gallery{grid-template-columns:repeat(2,1fr);}}
+  .gallery figure{margin:0; border-radius:14px; overflow:hidden; aspect-ratio:1; position:relative;}
+  .gallery img{width:100%; height:100%; object-fit:cover; transition:transform .3s ease;}
+  .gallery figure:hover img{transform:scale(1.06);}
+  .gallery figcaption{
+    position:absolute; bottom:0; left:0; right:0;
+    background:linear-gradient(to top, rgba(43,36,28,.85), transparent);
+    color:var(--white); font-size:.74rem; padding:20px 10px 8px;
+  }
+
+  .quote-block{
+    border-left:4px solid var(--ochre);
+    padding-left:24px; margin:32px 0;
+    font-family:'Fraunces',serif; font-style:italic; font-size:1.15rem;
+    color:var(--forest-dark);
+  }
+
+  .stat-row{display:flex; gap:40px; flex-wrap:wrap; margin-top:30px;}
+  .stat-row div{min-width:120px;}
+  .stat-num{font-family:'Fraunces',serif; font-weight:700; font-size:2.1rem; color:var(--terracotta);}
+  .stat-label{font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; color:rgba(43,36,28,.65);}
+
+  form{display:grid; gap:16px; max-width:560px;}
+  form .row2{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px;}
+  @media (max-width:600px){form .row2{grid-template-columns:1fr;}}
+  label{font-size:.82rem; font-weight:700; margin-bottom:6px; display:block;}
+  input, select, textarea{
+    width:100%; padding:12px 14px; border-radius:10px;
+    border:1.5px solid var(--line); background:var(--cream);
+    font-family:'Karla',sans-serif; font-size:.94rem; color:var(--charcoal);
+  }
+  input:focus, select:focus, textarea:focus{outline:2px solid var(--terracotta); outline-offset:1px;}
+  .form-note{font-size:.78rem; color:rgba(43,36,28,.6); margin-top:-6px;}
+
+  .donate-amounts{display:flex; gap:10px; flex-wrap:wrap; margin:8px 0 4px;}
+  .donate-amounts label{
+    border:1.5px solid var(--line); border-radius:10px; padding:10px 18px;
+    cursor:pointer; font-weight:700; font-size:.88rem; margin:0;
+    display:flex; align-items:center; gap:6px;
+  }
+  .donate-amounts input[type=radio]{width:auto;}
+
+  footer{background:var(--charcoal); color:var(--cream); padding:48px 0 28px; margin-top:40px;}
+  footer .wrap{display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr); gap:32px;}
+  @media (max-width:700px){footer .wrap{grid-template-columns:1fr;}}
+  footer h4{color:var(--cream); font-size:1rem;}
+  footer p, footer li{color:rgba(243,236,221,.72); font-size:.88rem;}
+  footer ul{list-style:none; padding:0; margin:0; display:grid; gap:8px;}
+  footer a{text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+  .foot-bottom{
+    max-width:1120px; margin:32px auto 0; padding:20px 24px 0;
+    border-top:1px solid rgba(243,236,221,.15);
+    font-size:.78rem; color:rgba(243,236,221,.55);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  .section-title{max-width:640px; margin-bottom:36px;}
+  .section-title h2{font-size:clamp(1.6rem,3vw,2.2rem);}
+  .section-title p{color:rgba(43,36,28,.75);}
+
+  .logo-badge{
+    width:64px; height:64px; border-radius:14px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:700; color:var(--white); font-size:1.3rem;
+    margin-bottom:18px;
+  }
+
+  .img-placeholder{
+    width:100%; height:100%;
+    background:
+      repeating-linear-gradient(45deg, rgba(43,36,28,.05), rgba(43,36,28,.05) 10px, rgba(43,36,28,.09) 10px, rgba(43,36,28,.09) 20px);
+    border:2px dashed rgba(43,36,28,.35);
+    border-radius:inherit;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:14px;
+  }
+  .img-placeholder span{
+    font-family:'Karla',sans-serif; font-weight:700; font-size:.8rem;
+    color:rgba(43,36,28,.55); line-height:1.4;
+  }
+  .img-placeholder .ph-icon{display:block; font-size:1.6rem; margin-bottom:6px; opacity:.5;}
+
+  @media (max-width:480px){
+    .gallery{grid-template-columns:1fr;}
+    .wrap{padding:0 16px;}
+    .hero{padding:44px 0 32px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <a href="#" class="brand" onclick="showPage('home');return false;">
+      <span class="brand-mark">SIM</span>
+      <span class="brand-text">Shallom International Ministry<small>Transforming &amp; Touching Lives</small></span>
+    </a>
+    <button class="nav-toggle" onclick="document.querySelector('nav.tabs').classList.toggle('open')">☰</button>
+    <nav class="tabs">
+      <button class="tab-btn active" data-page="home" onclick="showPage('home')">Ministry</button>
+      <button class="tab-btn" data-page="shafa" onclick="showPage('shafa')">Shafa Global</button>
+      <button class="tab-btn" data-page="coop" onclick="showPage('coop')">Cooperative</button>
+      <button class="tab-btn" data-page="acdi" onclick="showPage('acdi')">ACDI</button>
+    </nav>
+  </div>
+</header>
+<div class="dye-divider"></div>
+
+<!-- ============ HOME: SHALLOM INTERNATIONAL MINISTRY ============ -->
+<section id="home" class="page active">
+
+  <div class="wrap hero">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">Faith-based Nigerian NGO · Est. 2011</span>
+        <h1>Transforming and touching lives across Nigeria.</h1>
+        <p class="lead">Shallom International Ministry works with the most neglected communities in Nigeria — the poor, widows, orphans, IDPs and the vulnerable — through education, food security, peace-building and leadership training.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#donate-home">Donate Today</a>
+          <a class="btn btn-outline" href="#contact-home">Get in Touch</a>
+        </div>
+        <div class="stat-row">
+          <div><div class="stat-num">2011</div><div class="stat-label">Founded in Jos</div></div>
+          <div><div class="stat-num">4</div><div class="stat-label">Affiliate initiatives</div></div>
+          <div><div class="stat-num">3</div><div class="stat-label">States reached</div></div>
+        </div>
+      </div>
+      <div class="hero-img">
+        <div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Shallom Ministry leadership meeting with traditional and community leaders</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap band">
+    <div class="section-title">
+      <span class="eyebrow">Our Work</span>
+      <h2>A holistic approach to poverty and neglect.</h2>
+      <p>Shallom International Ministry is a registered Nigerian NGO founded by Rev. Shafa S. Salma on January 29, 2011, in Jos. We work to fulfil the Great Commission and promote peace, education, health, good governance and community empowerment — with no discrimination.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <span class="num">Education</span>
+        <h3>Learning for the neglected</h3>
+        <p>Our centres support the poor and disadvantaged with reading, writing and vocational training — including adult education and mentorship for out-of-school girls.</p>
+      </div>
+      <div class="card">
+        <span class="num">Leadership &amp; Management</span>
+        <h3>Training exceptional leaders</h3>
+        <p>We believe institutional failure stems from poor leadership. We train, groom and mentor ethical leaders in partnership with professional experts.</p>
+      </div>
+      <div class="card">
+        <span class="num">Shallomim Peace Desk</span>
+        <h3>Peace and reconciliation</h3>
+        <p>Conflict resolution training, mediation, peace conferences and inter-faith dialogue — building communities that live without fear.</p>
+      </div>
+      <div class="card">
+        <span class="num">Poverty &amp; Nutrition</span>
+        <h3>Food security first</h3>
+        <p>We train communities, especially women, in sustainable crop growing and balanced, affordable nutrition — because malnutrition harms a child's whole future.</p>
+      </div>
+      <div class="card">
+        <span class="num">Founder's Word</span>
+        <h3>H.E Rev. Shafa Salma</h3>
+        <p class="quote-block" style="margin:8px 0 0; font-size:1rem;">"My heart is on peace and always want to preach peace. I will continue advocating for peaceful co-existence in society."</p>
+      </div>
+      <div class="card">
+        <span class="num">Our Family</span>
+        <h3>Three affiliate initiatives</h3>
+        <p>Shallom Poverty Alleviation Cooperative, Africa Community Development Initiative (ACDI), and our trade partner Shafa Global Services Ltd — explore them in the menu above.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="band band-alt">
+    <div class="wrap">
+      <div class="section-title">
+        <span class="eyebrow">In the community</span>
+        <h2>Standing with communities, in good times and disaster.</h2>
+      </div>
+      <div class="gallery">
+        <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Ministry leaders meeting with a traditional ruler and community elders</span></div><figcaption>Community &amp; traditional leadership engagement</figcaption></figure>
+        <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Ministry representatives at a national women entrepreneurship event</span></div><figcaption>Representing our members at national forums</figcaption></figure>
+        <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Flood damage in a community Shallom serves</span></div><figcaption>Responding when disaster strikes</figcaption></figure>
+        <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>A woman from a Shallom-linked cooperative processing food</span></div><figcaption>Livelihood support in action</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap band" id="donate-home">
+    <div class="panel">
+      <div class="section-title" style="margin-bottom:24px;">
+        <span class="eyebrow">Help Us Grow</span>
+        <h2>Save a life today.</h2>
+        <p>Your donation of $10 makes a real difference in a child's life in northern Nigeria.</p>
+      </div>
+      <form action="https://formspree.io/f/mnjeogaa" method="POST">
+        <input type="hidden" name="_subject" value="New Donation Interest — Shallom International Ministry">
+        <div class="row2">
+          <div><label>Full name</label><input type="text" name="name" required></div>
+          <div><label>Email</label><input type="email" name="email" required></div>
+        </div>
+        <div>
+          <label>Choose an amount</label>
+          <div class="donate-amounts">
+            <label><input type="radio" name="amount" value="$10" checked>$10</label>
+            <label><input type="radio" name="amount" value="$20">$20</label>
+            <label><input type="radio" name="amount" value="$30">$30</label>
+            <label><input type="radio" name="amount" value="$40">$40</label>
+            <label><input type="radio" name="amount" value="Other">Other</label>
+          </div>
+        </div>
+        <div><label>Message (optional)</label><textarea name="message" rows="3"></textarea></div>
+        <button class="btn btn-primary" type="submit" style="justify-self:start;">Send Donation Interest</button>
+        <p class="form-note">This form notifies us of your intent to give — our team will follow up with secure payment details. No card information is collected on this site.</p>
+      </form>
+    </div>
+  </div>
+
+  <div class="wrap band" id="contact-home">
+    <div class="section-title">
+      <span class="eyebrow">Get in Touch</span>
+      <h2>Reach out or volunteer with us.</h2>
+    </div>
+    <div class="grid-2">
+      <form action="https://formspree.io/f/mnjeogaa" method="POST">
+        <input type="hidden" name="_subject" value="New Contact Message — Shallom International Ministry">
+        <div class="row2">
+          <div><label>First name</label><input type="text" name="first_name" required></div>
+          <div><label>Last name</label><input type="text" name="last_name" required></div>
+        </div>
+        <div class="row2">
+          <div><label>Email</label><input type="email" name="email" required></div>
+          <div><label>Interested in</label>
+            <select name="interest">
+              <option>Volunteering</option>
+              <option>Partnership</option>
+              <option>Donation</option>
+              <option>General enquiry</option>
+            </select>
+          </div>
+        </div>
+        <div><label>Message</label><textarea name="message" rows="4"></textarea></div>
+        <button class="btn btn-forest" type="submit" style="justify-self:start;">Submit</button>
+      </form>
+      <div class="card" style="align-self:start;">
+        <h3>National Coordinating Headquarters</h3>
+        <p>Bachure Junction, Jimeta-Yola, Adamawa State, Nigeria</p>
+        <p style="margin-top:14px;"><strong>Email:</strong> shallomim68@gmail.com</p>
+        <p><strong>Phone:</strong> +234-806-572-1554, +234-268-19743</p>
+        <p style="margin-top:14px;"><strong>Follow us</strong><br>Instagram &amp; Facebook: Shallom International Ministry</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ SHAFA GLOBAL SERVICES LTD ============ -->
+<section id="shafa" class="page">
+
+  <div class="wrap hero">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">Your Global One-Stop-Shop</span>
+        <h1>Shafa Global Services Ltd</h1>
+        <p class="lead">From small-scale beginnings in 2001 to a fully registered company under CAM Act 2020 — we provide all that you need under the sun, from registrations to trade, agro-products and consultancy.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#signup-shafa">Sign Up for Updates</a>
+          <a class="btn btn-outline" href="#contact-shafa">Contact Us</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Shafa Global Services agro-equipment</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap band" style="padding-top:0;">
+    <div class="card" style="border-left:4px solid var(--terracotta);">
+      <span class="num">Latest Update — July 24, 2026</span>
+      <h3>National Commercialization Intelligence and Ecosystem Workshop, Gombe</h3>
+      <p>Shafa Global Services Ltd took part in this workshop at Travel View Hotel, Gombe, convened to discuss ways of reducing abject poverty and applying innovation, invention and new technology to Basic Education, Poverty and Healthcare challenges. The event was attended by the Vice Chancellor of University of Bauchi, university professors, Honourable Commissioners of Education and of Science &amp; Technology, and civil society organizations.</p>
+    </div>
+  </div>
+
+  <div class="wrap band" style="padding-top:0;">
+    <div class="section-title">
+      <span class="eyebrow">Equipment &amp; Operations</span>
+      <h2>The tools behind our services.</h2>
+    </div>
+    <div class="gallery">
+      <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Motorized agro-equipment</span></div><figcaption>Agro-equipment for the value chain</figcaption></figure>
+      <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Grinding mill machinery</span></div><figcaption>Processing machinery</figcaption></figure>
+      <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Shafa Global Services leadership</span></div><figcaption>Our leadership</figcaption></figure>
+      <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Shafa Global Services at a national forum</span></div><figcaption>Representing SGS at national forums</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="wrap band">
+    <div class="logo-badge" style="background:var(--terracotta);">SGS</div>
+    <div class="section-title">
+      <span class="eyebrow">Partnership &amp; Unique Services</span>
+      <h2>Whatever you need, under the sun.</h2>
+      <p>Shafa Global Services Ltd is open to partnerships and unique service delivery — a genuine one-stop-shop for individuals and businesses.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card"><h3>Registrations</h3><p>CAC / NAFDAC registration, NIN, BVN, SON compliance support.</p></div>
+      <div class="card"><h3>Trade &amp; Logistics</h3><p>Import and export window services connecting Nigerian businesses to the world.</p></div>
+      <div class="card"><h3>Agro Value Chain</h3><p>Agro-value chain products and organic fertilizer for farmers and agribusinesses.</p></div>
+      <div class="card"><h3>Cosmetology &amp; Textiles</h3><p>Cosmetology products, textiles, shoes &amp; bags, and assorted beadswear.</p></div>
+      <div class="card"><h3>Food Products</h3><p>Assorted flour and food products sourced and supplied at scale.</p></div>
+      <div class="card"><h3>Business Growth</h3><p>Guidance on how to start, grow and expand your business from the ground up.</p></div>
+    </div>
+  </div>
+
+  <div class="band band-alt">
+    <div class="wrap grid-2">
+      <div>
+        <span class="eyebrow">Vision &amp; Mission</span>
+        <h2>To provide all that you need under the sun, satisfactorily.</h2>
+        <p style="color:rgba(43,36,28,.8);">Our mission is to create a world of networks — the most innovative, reliable and affordable products and services available.</p>
+        <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+          <span class="eyebrow" style="background:var(--white); padding:8px 14px; border-radius:999px; border:1px solid var(--line);">Team Work</span>
+          <span class="eyebrow" style="background:var(--white); padding:8px 14px; border-radius:999px; border:1px solid var(--line);">Innovation</span>
+          <span class="eyebrow" style="background:var(--white); padding:8px 14px; border-radius:999px; border:1px solid var(--line);">Quality</span>
+          <span class="eyebrow" style="background:var(--white); padding:8px 14px; border-radius:999px; border:1px solid var(--line);">Accountability</span>
+          <span class="eyebrow" style="background:var(--white); padding:8px 14px; border-radius:999px; border:1px solid var(--line);">Honesty &amp; Transparency</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Our Locations</h3>
+        <p><strong>Head Office:</strong> No. 5, Lekan Burthi, Dumna, Guyuk LGA, Adamawa State</p>
+        <p style="margin-top:10px;"><strong>Yola Coordinating Office:</strong> Kahyel Integrated Services Ltd Hub Incubation Centre, beside E.Y.N No. 1, Viniklang, Girei LGA, Adamawa State</p>
+        <p style="margin-top:10px;">Branch offices in Gombe, Plateau and Abuja FCT.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap band" id="signup-shafa">
+    <div class="panel">
+      <div class="section-title" style="margin-bottom:24px;">
+        <span class="eyebrow">Sign Up</span>
+        <h2>Weekly updates, trade fairs &amp; new arrivals.</h2>
+        <p>Get notified about local &amp; international events, exhibitions, opportunities and new product arrivals.</p>
+      </div>
+      <form action="https://formspree.io/f/mnjeogaa" method="POST">
+        <input type="hidden" name="_subject" value="New Sign-Up — Shafa Global Services">
+        <div class="row2">
+          <div><label>Name</label><input type="text" name="name" required></div>
+          <div><label>Mobile number</label><input type="tel" name="mobile" required></div>
+        </div>
+        <div><label>Email</label><input type="email" name="email" required></div>
+        <div><label>Request / Order</label><textarea name="request" rows="3"></textarea></div>
+        <button class="btn btn-primary" type="submit" style="justify-self:start;">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="wrap band" id="contact-shafa">
+    <div class="grid-2">
+      <div class="card">
+        <h3>Contact Shafa Global Services</h3>
+        <p><strong>Phone:</strong> +234 806-572-1554, +234 915-279-0142</p>
+        <p><strong>Email:</strong> pastorsssalma@gmail.com</p>
+      </div>
+      <div class="card">
+        <h3>Visit us</h3>
+        <p>Bachure Junction, Jimeta-Yola, Adamawa State, Nigeria, with branches in Gombe, Plateau and Abuja FCT.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ SHALLOM POVERTY ALLEVIATION COOPERATIVE ============ -->
+<section id="coop" class="page">
+
+  <div class="wrap hero">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">Shallom Poverty Alleviation Multipurpose Cooperative Union Ltd</span>
+        <h1>Live above poverty level.</h1>
+        <p class="lead">Born from Shallom International Ministry, our cooperative empowers members through savings, training and multipurpose businesses — from food processing to farming — so families can thrive.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#membership-coop">Become a Member</a>
+          <a class="btn btn-outline" href="#donate-coop">Donate</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Bread produced by the cooperative</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap band" style="padding-top:0;">
+    <div class="card" style="border-left:4px solid var(--forest);">
+      <span class="num">Latest Update — July 24, 2026</span>
+      <h3>National Commercialization Intelligence and Ecosystem Workshop, Gombe</h3>
+      <p>Shallom Poverty Alleviation Multipurpose Cooperative Union Ltd took part in this workshop at Travel View Hotel, Gombe, convened to discuss ways of reducing abject poverty and applying innovation, invention and new technology to Basic Education, Poverty and Healthcare challenges. The event was attended by the Vice Chancellor of University of Bauchi, university professors, Honourable Commissioners of Education and of Science &amp; Technology, and civil society organizations.</p>
+    </div>
+  </div>
+
+  <div class="wrap band" style="padding-top:0;">
+    <div class="logo-badge" style="background:var(--forest);">SPA</div>
+    <div class="section-title">
+      <span class="eyebrow">What We Do</span>
+      <h2>From raw grain to finished product — made by our members.</h2>
+      <p>Our members turn groundnuts and soybeans into kuli-kuli, soy milk, bread and more — real, hands-on trades that build steady household income.</p>
+    </div>
+    <div class="gallery">
+      <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Freshly shelled groundnuts ready for processing</span></div><figcaption>Raw groundnuts, sorted and ready</figcaption></figure>
+      <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Soybeans laid out on a sack</span></div><figcaption>Soybeans, sorted by hand</figcaption></figure>
+      <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Freshly baked bread from the cooperative</span></div><figcaption>Bread, baked and ready</figcaption></figure>
+      <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Cooperative leadership engaging with traditional rulers</span></div><figcaption>Community &amp; leadership engagement</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="wrap band">
+    <div class="section-title">
+      <span class="eyebrow">Vision &amp; Mission</span>
+      <h2>To be the leading cooperative union globally.</h2>
+      <p>Reducing hunger and lifting people out of abject poverty — while promoting members' economic independence and social responsibility through active partnerships.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card"><span class="num">01</span><h3>Savings</h3><p>Voluntary, compulsory, daily, weekly, monthly and end-of-year savings plans.</p></div>
+      <div class="card"><span class="num">02</span><h3>Skills Training</h3><p>Capacity building and business training for members venturing into new trades.</p></div>
+      <div class="card"><span class="num">03</span><h3>Loans</h3><p>Reasonable-interest loans to members for productive, income-generating purposes.</p></div>
+    </div>
+  </div>
+
+  <div class="wrap band" id="membership-coop">
+    <div class="panel">
+      <div class="section-title" style="margin-bottom:24px;">
+        <span class="eyebrow">Join Us</span>
+        <h2>Online Membership Form</h2>
+        <p>Membership registration is ₦2,500. Our team will reach out with payment details after you submit.</p>
+      </div>
+      <form action="https://formspree.io/f/mnjeogaa" method="POST">
+        <input type="hidden" name="_subject" value="New Membership Application — Shallom Poverty Alleviation Cooperative">
+        <div class="row2">
+          <div><label>Full name</label><input type="text" name="full_name" required></div>
+          <div><label>Phone number</label><input type="tel" name="phone" required></div>
+        </div>
+        <div class="row2">
+          <div><label>Gender</label>
+            <select name="gender"><option>Male</option><option>Female</option></select>
+          </div>
+          <div><label>Email address</label><input type="email" name="email"></div>
+        </div>
+        <div><label>Contact address</label><input type="text" name="address" required></div>
+        <div class="row2">
+          <div><label>Next of kin name</label><input type="text" name="next_of_kin"></div>
+          <div><label>WhatsApp phone number</label><input type="tel" name="whatsapp"></div>
+        </div>
+        <button class="btn btn-forest" type="submit" style="justify-self:start;">Submit Application</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="wrap band" id="donate-coop">
+    <div class="grid-2">
+      <div class="panel" style="padding:32px;">
+        <span class="eyebrow">Donate</span>
+        <h2 style="font-size:1.5rem;">Save the life of a vulnerable woman or child.</h2>
+        <p style="color:rgba(43,36,28,.78); margin-bottom:20px;">Give monthly or annually — every amount helps.</p>
+        <form action="https://formspree.io/f/mnjeogaa" method="POST">
+          <input type="hidden" name="_subject" value="New Donation Interest — Shallom Poverty Alleviation Cooperative">
+          <div><label>Full name</label><input type="text" name="name" required></div>
+          <div><label>Email</label><input type="email" name="email" required></div>
+          <div>
+            <label>Amount</label>
+            <div class="donate-amounts">
+              <label><input type="radio" name="amount" value="₦500" checked>₦500</label>
+              <label><input type="radio" name="amount" value="₦1,000">₦1,000</label>
+              <label><input type="radio" name="amount" value="₦5,000">₦5,000</label>
+              <label><input type="radio" name="amount" value="₦10,000">₦10,000</label>
+            </div>
+          </div>
+          <div><label>Frequency</label>
+            <select name="frequency"><option>One-time</option><option>Monthly</option><option>Annually</option></select>
+          </div>
+          <button class="btn btn-primary" type="submit" style="justify-self:start;">Donate</button>
+        </form>
+      </div>
+      <div class="card" style="align-self:start;">
+        <h3>Coordinating Office</h3>
+        <p>Bachure Junction, Jimeta Yola, Adamawa State, Nigeria</p>
+        <p style="margin-top:12px;"><strong>Phone:</strong> +234-806-456-6349, +234-705-478-8851, +234-806-572-1554</p>
+        <p><strong>Email:</strong> shallomim68@gmail.com</p>
+        <p style="margin-top:14px;"><strong>Registered office:</strong> Lekan, Burthi, Guyuk LGA, Adamawa State</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ AFRICA COMMUNITY DEVELOPMENT INITIATIVE (ACDI) ============ -->
+<section id="acdi" class="page">
+
+  <div class="wrap hero">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">Africa Community Development Initiative</span>
+        <h1>Developed communities. Transformed lives.</h1>
+        <p class="lead">Born from Shallom International Ministry, ACDI serves the wider secular world — advocating for human rights, good governance and support for the vulnerable across African communities.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#volunteer-acdi">Volunteer With Us</a>
+          <a class="btn btn-outline" href="#donate-acdi">Support Our Work</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <div class="img-placeholder"><span><span class="ph-icon">🖼️</span>A woman leading a community livelihood activity supported by ACDI</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap band" style="padding-top:0;">
+    <div class="card" style="border-left:4px solid var(--indigo);">
+      <span class="num">Latest Update — July 24, 2026</span>
+      <h3>National Commercialization Intelligence and Ecosystem Workshop, Gombe</h3>
+      <p>ACDI took part in this workshop at Travel View Hotel, Gombe, convened to discuss ways of reducing abject poverty and applying innovation, invention and new technology to Basic Education, Poverty and Healthcare challenges. The event was attended by the Vice Chancellor of University of Bauchi, university professors, Honourable Commissioners of Education and of Science &amp; Technology, and civil society organizations.</p>
+    </div>
+  </div>
+
+  <div class="wrap band" style="padding-top:0;">
+    <div class="logo-badge" style="background:var(--indigo);">ACDI</div>
+    <div class="section-title">
+      <span class="eyebrow">Vision &amp; Mission</span>
+      <h2>A corruption-free society. Developed communities.</h2>
+      <p>We work to create a world of developed communities with freedom of religion, human rights, patriotism, transparency and good governance — transforming communities and strengthening democracies for the vulnerable, women, children and the marginalized.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card"><span class="num">01</span><h3>Skills &amp; Empowerment</h3><p>Training communities on skills, fostering collaboration and volunteering that drives local development.</p></div>
+      <div class="card"><span class="num">02</span><h3>Attitudinal Change</h3><p>Educating communities on patriotism, productivity and holistic transformation.</p></div>
+      <div class="card"><span class="num">03</span><h3>Governance &amp; Rights</h3><p>Advocating for citizen engagement, accountability, human rights and transparency.</p></div>
+      <div class="card"><span class="num">04</span><h3>Climate &amp; Smart Cities</h3><p>Promoting climate change awareness and climate-smart agriculture (CSA).</p></div>
+      <div class="card"><span class="num">05</span><h3>Poverty &amp; Shelter</h3><p>Holistic support for IDPs and the vulnerable — shelter, basic needs, and economic development.</p></div>
+      <div class="card"><span class="num">06</span><h3>Our Story</h3><p>We transform grassroots communities, collaborating and advocating across African communities toward developed nations, as God intends.</p></div>
+    </div>
+  </div>
+
+  <div class="band band-alt">
+    <div class="wrap">
+      <div class="section-title">
+        <span class="eyebrow">Women-Led Livelihood Programs</span>
+        <h2>Empowering women at the grassroots.</h2>
+      </div>
+      <div class="gallery">
+        <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>A woman roasting groundnuts as part of an ACDI-supported livelihood program</span></div><figcaption>Livelihood training in action</figcaption></figure>
+        <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>A woman processing food as part of ACDI programs</span></div><figcaption>Hands-on skills training</figcaption></figure>
+        <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>A woman extracting soy milk by hand</span></div><figcaption>Turning skills into income</figcaption></figure>
+        <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>A woman sorting soybeans</span></div><figcaption>Quality &amp; craft, hand by hand</figcaption></figure>
+        <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>A woman blending groundnut paste</span></div><figcaption>Everyday resilience</figcaption></figure>
+        <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Kuli-kuli pieces prepared by women in the program</span></div><figcaption>Product ready for market</figcaption></figure>
+        <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>Flood-damaged housing in a community ACDI serves</span></div><figcaption>Responding when disaster strikes</figcaption></figure>
+        <figure><div class="img-placeholder"><span><span class="ph-icon">🖼️</span>A woman roasting soybeans</span></div><figcaption>Building steady household income</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap band" id="volunteer-acdi">
+    <div class="panel">
+      <div class="section-title" style="margin-bottom:24px;">
+        <span class="eyebrow">Volunteers Form</span>
+        <h2>Give your time and skills.</h2>
+      </div>
+      <form action="https://formspree.io/f/mnjeogaa" method="POST">
+        <input type="hidden" name="_subject" value="New Volunteer Application — ACDI">
+        <div class="row2">
+          <div><label>Name</label><input type="text" name="name" required></div>
+          <div><label>Phone contact</label><input type="tel" name="phone" required></div>
+        </div>
+        <div><label>Contact address</label><input type="text" name="address" required></div>
+        <div><label>List all your skills</label><textarea name="skills" rows="3"></textarea></div>
+        <div class="row2">
+          <div><label>Name of next of kin</label><input type="text" name="next_of_kin"></div>
+          <div><label>WhatsApp phone number</label><input type="tel" name="whatsapp"></div>
+        </div>
+        <button class="btn btn-forest" type="submit" style="justify-self:start;">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="wrap band" id="donate-acdi">
+    <div class="grid-2">
+      <div class="panel" style="padding:32px;">
+        <span class="eyebrow">Donate</span>
+        <h2 style="font-size:1.5rem;">Support a vulnerable woman or child today.</h2>
+        <form action="https://formspree.io/f/mnjeogaa" method="POST">
+          <input type="hidden" name="_subject" value="New Donation Interest — ACDI">
+          <div><label>Full name</label><input type="text" name="name" required></div>
+          <div><label>Email</label><input type="email" name="email" required></div>
+          <div>
+            <label>Amount</label>
+            <div class="donate-amounts">
+              <label><input type="radio" name="amount" value="₦500" checked>₦500</label>
+              <label><input type="radio" name="amount" value="₦1,000">₦1,000</label>
+              <label><input type="radio" name="amount" value="₦5,000">₦5,000</label>
+              <label><input type="radio" name="amount" value="₦10,000">₦10,000</label>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit" style="justify-self:start;">Donate</button>
+        </form>
+      </div>
+      <div class="card" style="align-self:start;">
+        <h3>Coordinating Office</h3>
+        <p>Bachure Junction, Jimeta Yola, Adamawa State, Nigeria</p>
+        <p style="margin-top:12px;"><strong>Phone:</strong> +234-802-092-7730, +234-915-789-0141, +234-813-782-6857</p>
+        <p><strong>Email:</strong> ezekielagatha8@gmail.com</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="dye-divider"></div>
+<footer>
+  <div class="wrap">
+    <div>
+      <h4>Shallom International Ministry</h4>
+      <p>Transforming and touching lives across Nigeria through education, poverty alleviation, peace-building and community development — together with our affiliate initiatives.</p>
+      <p style="margin-top:14px;">Bachure Junction, Jimeta-Yola, Adamawa State, Nigeria</p>
+    </div>
+    <div>
+      <h4>Our Initiatives</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('home');return false;">Shallom Ministry</a></li>
+        <li><a href="#" onclick="showPage('shafa');return false;">Shafa Global Services</a></li>
+        <li><a href="#" onclick="showPage('coop');return false;">Poverty Alleviation Cooperative</a></li>
+        <li><a href="#" onclick="showPage('acdi');return false;">ACDI</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li>shallomim68@gmail.com</li>
+        <li>+234-806-572-1554</li>
+        <li>Instagram &amp; Facebook: Shallom International Ministry</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Shallom International Ministry. All rights reserved.</span>
+    <span>Built with care for the communities we serve.</span>
+  </div>
+</footer>
+
+<script>
+  function showPage(id){
+    document.querySelectorAll('section.page').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.tab-btn[data-page="'+id+'"]').classList.add('active');
+    document.querySelector('nav.tabs').classList.remove('open');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+</script>
+
+</body>
+</html>
